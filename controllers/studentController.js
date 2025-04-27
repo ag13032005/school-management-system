@@ -1,6 +1,5 @@
 const Student = require('../models/Student');
 const Subject = require('../models/Subject');
-const Grade = require('../models/Grade');
 
 // Student dashboard
 exports.dashboard = async (req, res) => {
