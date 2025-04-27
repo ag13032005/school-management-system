@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
 const path = require('path');
-const port = process.env.PORT || 8080;
 
 // Initialize app
 const app = expres();
