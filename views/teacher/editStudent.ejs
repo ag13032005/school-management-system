@@ -1,5 +1,4 @@
 <%- include('../partials/header') %>
-
 <div class="container">
   <div class="row mt-4">
     <div class="col-md-12">
@@ -37,13 +36,19 @@
             </div>
             
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label for="rollNo">Roll Number</label>
                   <input type="number" id="rollNo" name="rollNo" class="form-control" min="1" value="<%= student.rollNo %>" required>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="parentPhone">Parent's Phone Number</label>
+                  <input type="tel" id="parentPhone" name="parentPhone" class="form-control" value="<%= student.parentPhone || '' %>" placeholder="Enter parent's phone number">
+                </div>
+              </div>
+              <div class="col-md-4">
                 <div class="form-group">
                   <label for="standardId">Class</label>
                   <select id="standardId" name="standardId" class="form-control" required>
@@ -90,5 +95,4 @@
     </div>
   </div>
 </div>
-
 <%- include('../partials/footer') %>
