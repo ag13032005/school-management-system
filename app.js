@@ -6,7 +6,7 @@ const path = require('path');
 const port = process.env.PORT || 8080;
 
 // Initialize app
-const app = express();
+const app = expres();
 
 // Connect to database - MongoDB Atlas Connection
 const connectDB = async () => {
