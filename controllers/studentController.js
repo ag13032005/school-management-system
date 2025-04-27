@@ -1,6 +1,5 @@
 const Student = require('../models/Student');
 const Subject = require('../models/Subject');
-
 // Student dashboard
 exports.dashboard = async (req, res) => {
   try {
@@ -39,8 +38,6 @@ exports.dashboard = async (req, res) => {
     
     const overallPercentage = totalMaxMarks > 0 ? 
       ((totalMarks / totalMaxMarks) * 100).toFixed(2) : 0;
-  
-    }
     
     res.render('student/dashboard', {
       student,
