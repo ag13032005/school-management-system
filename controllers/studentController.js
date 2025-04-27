@@ -39,17 +39,7 @@ exports.dashboard = async (req, res) => {
     
     const overallPercentage = totalMaxMarks > 0 ? 
       ((totalMarks / totalMaxMarks) * 100).toFixed(2) : 0;
-    
-    // Get grade if available
-    let overallGrade = null;
-    const grades = await Grade.find({ standard: student.standard._id })
-      .sort({ minMarks: -1 });
-    
-    for (const grade of grades) {
-      if (overallPercentage >= grade.minMarks && overallPercentage <= grade.maxMarks) {
-        overallGrade = grade.gradeName;
-        break;
-      }
+  
     }
     
     res.render('student/dashboard', {
@@ -58,8 +48,6 @@ exports.dashboard = async (req, res) => {
       totalMarks,
       totalMaxMarks,
       overallPercentage,
-      overallGrade,
-      grades: grades.length > 0
     });
   } catch (err) {
     console.error(err);
