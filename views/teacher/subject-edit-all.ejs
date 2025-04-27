@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/subjects">Subjects</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit All Subjects</li>
+          </ol>
+        </nav>
+        <h2>Edit All Subjects</h2>
+        <p class="lead">Make changes to multiple subjects at once</p>
+        <div class="alert alert-info">
+          <i class="fas fa-info-circle"></i> Changes will be saved for all modified subjects when you click the "Save All Changes" button.
+        </div>
+      </div>
+    </div>
+    <form id="edit-all-subjects-form" method="POST" action="/subjects/update-all">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>Name</th>
+              <th>Code</th>
+              <th>Description</th>
+              <th>Department</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% subjects.forEach((subject, index) => { %>
+              <tr>
+                <td>
+                  <input type="hidden" name="subjects[<%= index %>][id]" value="<%= subject._id %>">
+                  <input type="text" class="form-control" name="subjects[<%= index %>][name]" value="<%= subject.name %>" required>
+                </td>
+                <td>
+                  <input type="text" class="form-control" name="subjects[<%= index %>][code]" value="<%= subject.code %>">
+                </td>
+                <td>
+                  <textarea class="form-control" name="subjects[<%= index %>][description]" rows="2"><%= subject.description %></textarea>
+                </td>
+                <td>
+                  <select class="form-control" name="subjects[<%= index %>][department]">
+                    <option value="">-- Select Department --</option>
+                    <option value="mathematics" <%= subject.department === 'mathematics' ? 'selected' : '' %>>Mathematics</option>
+                    <option value="science" <%= subject.department === 'science' ? 'selected' : '' %>>Science</option>
+                    <option value="languages" <%= subject.department === 'languages' ? 'selected' : '' %>>Languages</option>
+                    <option value="humanities" <%= subject.department === 'humanities' ? 'selected' : '' %>>Humanities</option>
+                    <option value="arts" <%= subject.department === 'arts' ? 'selected' : '' %>>Arts</option>
+                    <option value="physical_education" <%= subject.department === 'physical_education' ? 'selected' : '' %>>Physical Education</option>
+                    <option value="other" <%= subject.department === 'other' ? 'selected' : '' %>>Other</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="form-control" name="subjects[<%= index %>][status]">
+                    <option value="active" <%= subject.status === 'active' ? 'selected' : '' %>>Active</option>
+                    <option value="inactive" <%= subject.status === 'inactive' ? 'selected' : '' %>>Inactive</option>
+                  </select>
+                </td>
+                <td>
+                  <a href="/subjects/view/<%= subject._id %>" class="btn btn-sm btn-info">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  <a href="#" class="btn btn-sm btn-danger remove-subject" data-id="<%= subject._id %>">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+  
