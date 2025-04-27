@@ -1,8 +1,9 @@
-const express = require('express');
+const expres = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
 const path = require('path');
+const port = process.env.PORT || 8080;
 
 // Initialize app
 const app = express();
@@ -25,11 +26,11 @@ const connectDB = async () => {
 // Connect to database
 connectDB();
 
-// Configure expresss
+// Configure express
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(expres.urlencoded({ extended: true }));
+app.use(expres.json());
+app.use(expres.static(path.join(__dirname, 'public')));
 
 // Session configuration
 app.use(session({
@@ -56,7 +57,6 @@ app.use('/teacher', require('./routes/teacherRoutes'));
 app.use('/student', require('./routes/studentRoutes'));
 app.use('/standards', require('./routes/standardRoutes'));
 app.use('/subjects', require('./routes/subjectRoutes'));
-app.use('/grades', require('./routes/gradeRoutes'));
 
 // Home route
 app.get('/', (req, res) => {
