@@ -11,10 +11,11 @@ const app = express();
 // Connect to database - MongoDB Atlas Connection
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect('mongodb+srv://tavi:8454958530@tavi.mongodb.net/school_management?retryWrites=true&w=majority', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    const conn = await mongoose.connect('mongodb+srv://tavi:8454958530@tavi.2a4sfzo.mongodb.net/school_management?retryWrites=true&w=majority&appName=tavi', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+    
     
     console.log(`MongoDB Atlas Cluster Connected: ${conn.connection.host}`);
   } catch (err) {
