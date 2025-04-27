@@ -1,4 +1,4 @@
-const expres = require('express');
+const express = require('express');
 const router = express.Router();
 const subjectController = require('../controllers/subjectController');
 const { isTeacherAuthenticated } = require('../middleware/auth');
