@@ -14,134 +14,83 @@ router.get('/delete/:id', subjectController.deleteSubject);
 
 module.exports = router;
 
-// Adding Grade controller functionality
+// Modified Grade controller functionality to only handle marks
 // controllers/gradeController.js
-const Grade = require('../models/Grade');
 const Standard = require('../models/Standard');
+const Grade = require('../models/Grade');
 
-// Get grades for a standard
-exports.getGrades = async (req, res) => {
+// Get marks for a standard
+exports.getMarks = async (req, res) => {
   try {
     const standardId = req.params.standardId;
-    const grades = await Grade.find({ standard: standardId }).sort({ minMarks: -1 });
+    const grades = await Grade.find({ standard: standardId }).sort({ marks: -1 });
     const standard = await Standard.findById(standardId);
     
-    res.render('teacher/grades', {
+    res.render('teacher/marks', {
       grades,
       standard
     });
   } catch (err) {
     console.error(err);
-    req.flash('error_msg', 'Failed to fetch grades');
+    req.flash('error_msg', 'Failed to fetch marks');
     res.redirect('/standards');
   }
 };
 
-// Add grade
-exports.addGrade = async (req, res) => {
-  const { standardId, gradeName, minMarks, maxMarks } = req.body;
+// Add marks
+exports.addMarks = async (req, res) => {
+  const { standardId, studentId, subjectId, marks } = req.body;
   
   try {
-    // Validate marks range
-    if (minMarks > maxMarks) {
-      req.flash('error_msg', 'Minimum marks cannot exceed maximum marks');
-      return res.redirect(`/grades/${standardId}`);
-    }
-    
-    // Check for overlapping ranges
-    const existingGrades = await Grade.find({ 
-      standard: standardId,
-      $or: [
-        { minMarks: { $lte: maxMarks, $gte: minMarks } },
-        { maxMarks: { $gte: minMarks, $lte: maxMarks } },
-        { $and: [
-          { minMarks: { $lte: minMarks } },
-          { maxMarks: { $gte: maxMarks } }
-        ]}
-      ]
-    });
-    
-    if (existingGrades.length > 0) {
-      req.flash('error_msg', 'Grade range overlaps with existing grades');
-      return res.redirect(`/grades/${standardId}`);
-    }
-    
     const newGrade = new Grade({
       standard: standardId,
-      gradeName,
-      minMarks,
-      maxMarks,
+      student: studentId,
+      subject: subjectId,
+      marks: marks,
       teacher: req.session.user.id
     });
     
     await newGrade.save();
-    req.flash('success_msg', 'Grade added successfully');
+    req.flash('success_msg', 'Marks added successfully');
     res.redirect(`/grades/${standardId}`);
   } catch (err) {
     console.error(err);
-    req.flash('error_msg', 'Failed to add grade');
+    req.flash('error_msg', 'Failed to add marks');
     res.redirect(`/grades/${standardId}`);
   }
 };
 
-// Update grade
-exports.updateGrade = async (req, res) => {
-  const { gradeName, minMarks, maxMarks, standardId } = req.body;
+// Update marks
+exports.updateMarks = async (req, res) => {
+  const { marks, standardId } = req.body;
   
   try {
-    // Validate marks range
-    if (minMarks > maxMarks) {
-      req.flash('error_msg', 'Minimum marks cannot exceed maximum marks');
-      return res.redirect(`/grades/${standardId}`);
-    }
-    
-    // Check for overlapping ranges (excluding this grade)
-    const existingGrades = await Grade.find({ 
-      standard: standardId,
-      _id: { $ne: req.params.id },
-      $or: [
-        { minMarks: { $lte: maxMarks, $gte: minMarks } },
-        { maxMarks: { $gte: minMarks, $lte: maxMarks } },
-        { $and: [
-          { minMarks: { $lte: minMarks } },
-          { maxMarks: { $gte: maxMarks } }
-        ]}
-      ]
-    });
-    
-    if (existingGrades.length > 0) {
-      req.flash('error_msg', 'Grade range overlaps with existing grades');
-      return res.redirect(`/grades/${standardId}`);
-    }
-    
     await Grade.findByIdAndUpdate(req.params.id, {
-      gradeName,
-      minMarks,
-      maxMarks
+      marks
     });
     
-    req.flash('success_msg', 'Grade updated successfully');
+    req.flash('success_msg', 'Marks updated successfully');
     res.redirect(`/grades/${standardId}`);
   } catch (err) {
     console.error(err);
-    req.flash('error_msg', 'Failed to update grade');
+    req.flash('error_msg', 'Failed to update marks');
     res.redirect(`/grades/${standardId}`);
   }
 };
 
-// Delete grade
-exports.deleteGrade = async (req, res) => {
+// Delete marks
+exports.deleteMarks = async (req, res) => {
   try {
     const grade = await Grade.findById(req.params.id);
     const standardId = grade.standard;
     
     await Grade.findByIdAndDelete(req.params.id);
     
-    req.flash('success_msg', 'Grade deleted successfully');
+    req.flash('success_msg', 'Marks entry deleted successfully');
     res.redirect(`/grades/${standardId}`);
   } catch (err) {
     console.error(err);
-    req.flash('error_msg', 'Failed to delete grade');
+    req.flash('error_msg', 'Failed to delete marks');
     res.redirect('/standards');
   }
 };
