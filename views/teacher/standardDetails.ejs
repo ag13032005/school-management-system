@@ -55,36 +55,6 @@
         <div class="card-header bg-success text-white">
           <h4>Grading System</h4>
         </div>
-        <div class="card-body">
-          <% if (grades.length > 0) { %>
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Grade</th>
-                  <th>Min %</th>
-                  <th>Max %</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% grades.forEach(grade => { %>
-                  <tr>
-                    <td><%= grade.gradeName %></td>
-                    <td><%= grade.minMarks %></td>
-                    <td><%= grade.maxMarks %></td>
-                  </tr>
-                <% }); %>
-              </tbody>
-            </table>
-            <div class="text-center">
-              <a href="/grades/<%= standard._id %>" class="btn btn-success">Manage Grades</a>
-            </div>
-          <% } else { %>
-            <div class="alert alert-info">No grading system defined for this class yet.</div>
-            <div class="text-center">
-              <a href="/grades/<%= standard._id %>" class="btn btn-success">Setup Grading</a>
-            </div>
-          <% } %>
-        </div>
       </div>
     </div>
   </div>
