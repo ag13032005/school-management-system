@@ -1,4 +1,4 @@
-const expres = require('express');
+const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -28,9 +28,9 @@ connectDB();
 
 // Configure express
 app.set('view engine', 'ejs');
-app.use(expres.urlencoded({ extended: true }));
-app.use(expres.json());
-app.use(expres.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Session configuration
 app.use(session({
