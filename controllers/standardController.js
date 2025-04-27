@@ -67,8 +67,6 @@ exports.deleteStandard = async (req, res) => {
     // Delete related subjects
     await Subject.deleteMany({ standard: standardId });
     
-    // Delete related grades
-    await Grade.deleteMany({ standard: standardId });
     
     // Delete standard
     await Standard.findByIdAndDelete(standardId);
@@ -94,12 +92,10 @@ exports.getStandardDetails = async (req, res) => {
     }
     
     const subjects = await Subject.find({ standard: standardId });
-    const grades = await Grade.find({ standard: standardId }).sort({ minMarks: -1 });
     
     res.render('teacher/standardDetails', {
       standard,
       subjects,
-      grades
     });
   } catch (err) {
     console.error(err);
