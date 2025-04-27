@@ -1,11 +1,11 @@
-const expres = require('express');
+const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
 const path = require('path');
 
 // Initialize app
-const app = expres();
+const app = express();
 
 // Connect to database - MongoDB Atlas Connection
 const connectDB = async () => {
@@ -25,11 +25,11 @@ const connectDB = async () => {
 // Connect to database
 connectDB();
 
-// Configure express
+// Configure expresss
 app.set('view engine', 'ejs');
-app.use(expres.urlencoded({ extended: true }));
-app.use(expres.json());
-app.use(expres.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Session configuration
 app.use(session({
