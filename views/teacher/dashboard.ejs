@@ -1,0 +1,76 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <h2>Teacher Dashboard</h2>
+      <p class="lead">Welcome, <%= user.name %></p>
+    </div>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <h1 class="display-4"><i class="fas fa-chalkboard"></i></h1>
+          <h4>Classes</h4>
+          <p class="lead"><%= standardsCount %></p>
+          <a href="/standards" class="btn btn-primary">Manage Classes</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <h1 class="display-4"><i class="fas fa-book"></i></h1>
+          <h4>Subjects</h4>
+          <p class="lead"><%= subjectsCount %></p>
+          <a href="/subjects" class="btn btn-primary">Manage Subjects</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <h1 class="display-4"><i class="fas fa-user-graduate"></i></h1>
+          <h4>Students</h4>
+          <p class="lead"><%= studentsCount %></p>
+          <a href="/teacher/students" class="btn btn-primary">Manage Students</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-info text-white">
+          <h4>Quick Actions</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <a href="/standards/add" class="btn btn-outline-primary btn-block mb-2">
+                <i class="fas fa-plus-circle"></i> Add Class
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="/subjects/add" class="btn btn-outline-primary btn-block mb-2">
+                <i class="fas fa-plus-circle"></i> Add Subject
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="/teacher/students/add" class="btn btn-outline-primary btn-block mb-2">
+                <i class="fas fa-plus-circle"></i> Add Student
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

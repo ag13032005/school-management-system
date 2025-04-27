@@ -1,0 +1,90 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <h2>Student Dashboard</h2>
+      <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+          <h4>Student Information</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <p><strong>Name:</strong> <%= student.name %></p>
+              <p><strong>Student ID:</strong> <%= student.studentId %></p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Class:</strong> <%= student.standard.name %></p>
+              <p><strong>Roll Number:</strong> <%= student.rollNo %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h4>Academic Performance</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Maximum Marks</th>
+                  <th>Marks Obtained</th>
+                  <th>Percentage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% subjectResults.forEach(subject => { %>
+                  <tr>
+                    <td><%= subject.name %></td>
+                    <td><%= subject.maxMarks %></td>
+                    <td><%= subject.marks %></td>
+                    <td>
+                      <%= subject.percentage %>%
+                      <div class="progress mt-1">
+                        <div class="progress-bar" role="progressbar" style="width: <%= subject.percentage %>%" aria-valuenow="<%= subject.percentage %>" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+              <tfoot>
+                <tr class="bg-light font-weight-bold">
+                  <td>Overall</td>
+                  <td><%= totalMaxMarks %></td>
+                  <td><%= totalMarks %></td>
+                  <td>
+                    <%= overallPercentage %>%
+                    <div class="progress mt-1">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: <%= overallPercentage %>%" aria-valuenow="<%= overallPercentage %>" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          
+          <% if (grades && overallGrade) { %>
+            <div class="text-center mt-4">
+              <div class="card">
+                <div class="card-body">
+                  <h3>Your Grade: <span class="badge badge-success"><%= overallGrade %></span></h3>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

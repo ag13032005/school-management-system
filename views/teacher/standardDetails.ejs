@@ -1,0 +1,93 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/standards">Classes</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= standard.name %> Details</li>
+        </ol>
+      </nav>
+      <h2>Class Details: <%= standard.name %></h2>
+    </div>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h4>Subjects</h4>
+        </div>
+        <div class="card-body">
+          <% if (subjects.length > 0) { %>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Subject Name</th>
+                  <th>Max Marks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% subjects.forEach(subject => { %>
+                  <tr>
+                    <td><%= subject.name %></td>
+                    <td><%= subject.maxMarks %></td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+            <div class="text-center">
+              <a href="/subjects" class="btn btn-primary">Manage Subjects</a>
+            </div>
+          <% } else { %>
+            <div class="alert alert-info">No subjects added for this class yet.</div>
+            <div class="text-center">
+              <a href="/subjects" class="btn btn-primary">Add Subjects</a>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+          <h4>Grading System</h4>
+        </div>
+        <div class="card-body">
+          <% if (grades.length > 0) { %>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Grade</th>
+                  <th>Min %</th>
+                  <th>Max %</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% grades.forEach(grade => { %>
+                  <tr>
+                    <td><%= grade.gradeName %></td>
+                    <td><%= grade.minMarks %></td>
+                    <td><%= grade.maxMarks %></td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+            <div class="text-center">
+              <a href="/grades/<%= standard._id %>" class="btn btn-success">Manage Grades</a>
+            </div>
+          <% } else { %>
+            <div class="alert alert-info">No grading system defined for this class yet.</div>
+            <div class="text-center">
+              <a href="/grades/<%= standard._id %>" class="btn btn-success">Setup Grading</a>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Management System</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-12 text-center">
+        <h1>School Management System</h1>
+        <p class="lead">A comprehensive solution for managing school data</p>
+      </div>
+    </div>
+    
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h4>Teacher Portal</h4>
+          </div>
+          <div class="card-body">
+            <p>Access the teacher portal to manage classes, subjects, and students.</p>
+            <div class="text-center mt-4">
+              <a href="/teacher/login" class="btn btn-primary mr-2">Login</a>
+              <a href="/teacher/signup" class="btn btn-outline-primary">Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header bg-success text-white">
+            <h4>Student Portal</h4>
+          </div>
+          <div class="card-body">
+            <p>Access the student portal to view your academic records and results.</p>
+            <div class="text-center mt-4">
+              <a href="/student/login" class="btn btn-success">Login with Student ID</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>
