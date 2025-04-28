@@ -22,7 +22,35 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
-  
+
+// Get the edit all standards page
+    router.get('/standards/edit-all', ensureAuthenticated, async (req, res) => {
+      try {
+        const standards = await Standard.find({ user: req.user.id }).sort({ name: 1 });
+        res.render('standards/edit-all', {
+          standards
+        });
+      } catch (err) {
+        console.error(err);
+        req.flash('error_msg', 'An error occurred while fetching standards');
+        res.redirect('/dashboard');
+      }
+    });
+    
+    // Post route to update all standards
+    router.post('/standards/update-all', ensureAuthenticated, async (req, res) => {
+      try {
+        // Process the form data and update all standards
+        // You'll need to parse the form data which will contain multiple standards
+        
+        req.flash('success_msg', 'All classes updated successfully');
+        res.redirect('/standards');
+      } catch (err) {
+        console.error(err);
+        req.flash('error_msg', 'An error occurred while updating standards');
+        res.redirect('/standards/edit-all');
+      }
+    });
 // GET route to show edit all standards page
   router.get('/standards/edit-all', async (req, res) => {
     try {
